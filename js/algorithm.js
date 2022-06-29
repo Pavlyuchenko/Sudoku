@@ -1,4 +1,8 @@
 function setupAlgorithm() {
+	// Creates two distinct boards:
+	// one with DOM elements (boardElements)
+	// one with values (board)
+
 	boardElements = [];
 	let fields = document.getElementsByClassName("field");
 	for (let i = 0; i < 9; i++) {
@@ -8,6 +12,7 @@ function setupAlgorithm() {
 		}
 	}
 
+	// Example Sudokus
 	initialBoard = [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -52,10 +57,13 @@ function setupAlgorithm() {
 		[4, 0, 3, 1, 0, 0, 0, 0, 8],
 		[0, 5, 0, 8, 0, 0, 7, 0, 0],
 	];
+
+	// Create a copy of the initial board
 	board = initialBoard.map(function (arr) {
 		return [...arr];
 	});
 
+	// Enter values from initial board to the HTML
 	for (let i = 0; i < initialBoard.length; i++) {
 		for (let j = 0; j < initialBoard.length; j++) {
 			if (initialBoard[i][j] === 0) continue;
@@ -69,6 +77,10 @@ function updateBoard(i, j, value) {
 }
 
 function isInitialBoard() {
+	// Check if number was in the initial Sudoku
+	// in that case don't allow the field to change
+	// since it's the assignment
+
 	let [i, j] = getIndexesOfField();
 	if (initialBoard[i][j] !== 0) {
 		return true;
@@ -91,24 +103,24 @@ function numberUsedInRow(number) {
 
 	let activeFieldId = parseInt(activeField.id);
 
+	// Look left
 	for (
 		let k = Math.floor((activeFieldId - 1) / 9) * 9 + 1;
 		k < activeFieldId;
 		k++
 	) {
-		//console.log(document.getElementById(k));
 		let [m, n] = getIndexesOfField(document.getElementById(k));
 		if (board[m][n] === number) {
 			errorField(boardElements[m][n]);
 			return true;
 		}
 	}
+	// Look right
 	for (
 		let k = activeFieldId + 1;
 		k <= 9 * Math.ceil(activeFieldId / 9);
 		k++
 	) {
-		//console.log(document.getElementById(k));
 		let [m, n] = getIndexesOfField(document.getElementById(k));
 
 		if (board[m][n] === number) {
@@ -123,16 +135,16 @@ function numberUsedInColumn(number) {
 
 	let activeFieldId = parseInt(activeField.id);
 
+	// Look up
 	for (let k = activeFieldId - 9; k > 0; k -= 9) {
-		//console.log(document.getElementById(k));
 		let [m, n] = getIndexesOfField(document.getElementById(k));
 		if (board[m][n] === number) {
 			errorField(boardElements[m][n]);
 			return true;
 		}
 	}
+	// Look down
 	for (let k = activeFieldId + 9; k <= 81; k += 9) {
-		//console.log(document.getElementById(k));
 		let [m, n] = getIndexesOfField(document.getElementById(k));
 
 		if (board[m][n] === number) {
@@ -158,14 +170,22 @@ function backtracking() {
 	errors = false;
 	if (isSudokuDone(board)) return true;
 
-	let nextField = findNextEmptyField(board);
+	let nextField = findNextEmptyField(board); // Empty field
 
+	// Check all numbers from 1 to 9
+	// if they can be placed in the field
 	for (let i = 1; i <= 9; i++) {
+		// activeField is a global variable, set it every time in the loop
 		activeField = boardElements[nextField[0]][nextField[1]];
+
 		if (isMoveValid(i)) {
+			// If the move is valid, place the number
 			board[nextField[0]][nextField[1]] = i;
 			activeField.textContent = i;
+			// If backtracking returned true, means that Sudoku is done
 			if (backtracking()) return true;
+
+			// Else the move is not valid, so we need to backtrack
 			board[nextField[0]][nextField[1]] = 0;
 			activeField.textContent = "";
 		}
@@ -177,6 +197,8 @@ function backtracking() {
 }
 
 function findNextEmptyField(board) {
+	// Finds the next empty field in Sudoku
+
 	for (let i = 0; i < board.length; i++) {
 		for (let j = 0; j < board.length; j++) {
 			if (board[i][j] === 0) return [i, j];

@@ -105,6 +105,8 @@ function numberPressed(numberPressed) {
 }
 
 function getIndexesOfField(field) {
+	// Enter DOMElement into function to get its indexes in board
+
 	if (field == undefined) {
 		field = activeField;
 	}

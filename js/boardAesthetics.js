@@ -54,6 +54,7 @@ function cancelChoice() {
 }
 
 function errorField(field) {
+	// Show the field, which is the reason why the number cannot be placed on the field
 	if (!errors) return;
 	field.style.border = "6px solid red";
 
