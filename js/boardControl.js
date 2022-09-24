@@ -10,6 +10,9 @@ function keyPressed(e) {
 		case "Delete":
 			if (isInitialBoard()) break;
 
+			let [i, j] = getIndexesOfField();
+			updateBoard(i, j, 0);
+
 			activeField.textContent = "";
 			break;
 		case "Tab":

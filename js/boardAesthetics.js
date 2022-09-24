@@ -24,7 +24,7 @@ function unsetActiveField() {
 function setActiveField(field) {
 	// Sets the activeField's style and the variable itself
 
-	field.style.border = "8px solid red";
+	field.style.border = "8px solid #0096FF";
 	field.style.backgroundColor = "#ccc";
 	activeField = field;
 }

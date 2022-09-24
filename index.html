@@ -5,29 +5,77 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
 
 		<title>Sudoku solver</title>
 
-		<script src="/js/init.js"></script>
-		<script src="/js/boardAesthetics.js"></script>
-		<script src="/js/boardControl.js"></script>
-		<script src="/js/algorithm.js"></script>
+		<script src="js/init.js"></script>
+		<script src="js/boardAesthetics.js"></script>
+		<script src="js/boardControl.js"></script>
+		<script src="js/algorithm.js"></script>
+		<script src="js/settings.js"></script>
 
-		<link rel="stylesheet" href="/styles.css" />
+		<link rel="stylesheet" href="styles.css" />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
 	<body>
-		<header onclick="cancelChoice()">Top</header>
+		<header onclick="cancelChoice()">Sudoku Solver</header>
 		<main>
 			<section id="left" onclick="cancelChoice()">
-				<button onclick="backtracking()">Solve!</button>
+				<div id="choice-wrapper">
+					<h2>Choose a Sudoku to solve</h2>
+					<h3>Easy</h3>
+					<div class="sudoku-choice">
+						<div class="option" onclick="chooseSudoku(1);">
+							Easy Sudoku 1
+						</div>
+						<div class="option" onclick="chooseSudoku(2);">
+							Easy Sudoku 2
+						</div>
+						<div class="option" onclick="chooseSudoku(3);">
+							Easy Sudoku 3
+						</div>
+						<div class="option" onclick="chooseSudoku(4);">
+							Easy Sudoku 4
+						</div>
+					</div>
+					<h3>Medium</h3>
+					<div class="sudoku-choice">
+						<div class="option" onclick="chooseSudoku(5);">
+							Medium Sudoku 1
+						</div>
+						<div class="option" onclick="chooseSudoku(6);">
+							Medium Sudoku 2
+						</div>
+						<div class="option" onclick="chooseSudoku(7);">
+							Medium Sudoku 3
+						</div>
+						<div class="option" onclick="chooseSudoku(8);">
+							Medium Sudoku 4
+						</div>
+					</div>
+					<h3>Hard</h3>
+					<div class="sudoku-choice">
+						<div class="option" onclick="chooseSudoku(9);">
+							Hard Sudoku 1
+						</div>
+						<div class="option" onclick="chooseSudoku(10);">
+							Hard Sudoku 2
+						</div>
+						<div class="option" onclick="chooseSudoku(11);">
+							Hard Sudoku 3
+						</div>
+						<div class="option" onclick="chooseSudoku(12);">
+							Hard Sudoku 4
+						</div>
+					</div>
+				</div>
 			</section>
 			<section id="board">
 				<div class="bigger">
@@ -131,8 +179,74 @@
 					<div class="field" id="81"></div>
 				</div>
 			</section>
-			<section id="right" onclick="cancelChoice()">Right</section>
+			<section id="right" onclick="cancelChoice()">
+				<button onclick="backtrackingWrapper();" id="solve-button">
+					Solve!
+				</button>
+			</section>
 		</main>
-		<footer onclick="cancelChoice()">Bot</footer>
+		<footer onclick="cancelChoice()"></footer>
+
+		<aside id="solving">Solving the sudoku...</aside>
+		<div id="burger-menu" onclick="showBurgerMenu();">
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		<aside id="hamburger-menu">
+			<button onclick="backtrackingWrapper();" id="ham-solve">
+				Solve!
+			</button>
+
+			<button id="hide-hamburger" onclick="hideHamburger();">X</button>
+
+			<div>
+				<h3>Easy</h3>
+				<div class="sudoku-choice">
+					<div class="option" onclick="chooseSudoku(1);">
+						Easy Sudoku 1
+					</div>
+					<div class="option" onclick="chooseSudoku(2);">
+						Easy Sudoku 2
+					</div>
+					<div class="option" onclick="chooseSudoku(3);">
+						Easy Sudoku 3
+					</div>
+					<div class="option" onclick="chooseSudoku(4);">
+						Easy Sudoku 4
+					</div>
+				</div>
+				<h3>Medium</h3>
+				<div class="sudoku-choice">
+					<div class="option" onclick="chooseSudoku(5);">
+						Medium Sudoku 1
+					</div>
+					<div class="option" onclick="chooseSudoku(6);">
+						Medium Sudoku 2
+					</div>
+					<div class="option" onclick="chooseSudoku(7);">
+						Medium Sudoku 3
+					</div>
+					<div class="option" onclick="chooseSudoku(8);">
+						Medium Sudoku 4
+					</div>
+				</div>
+				<h3>Hard</h3>
+				<div class="sudoku-choice">
+					<div class="option" onclick="chooseSudoku(9);">
+						Hard Sudoku 1
+					</div>
+					<div class="option" onclick="chooseSudoku(10);">
+						Hard Sudoku 2
+					</div>
+					<div class="option" onclick="chooseSudoku(11);">
+						Hard Sudoku 3
+					</div>
+					<div class="option" onclick="chooseSudoku(12);">
+						Hard Sudoku 4
+					</div>
+				</div>
+			</div>
+		</aside>
 	</body>
 </html>
