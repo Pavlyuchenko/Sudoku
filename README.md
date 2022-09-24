@@ -1,4 +1,4 @@
-# Sudoku
+# [Sudoku Solver](https://pavlyuchenko.github.io/Sudoku/)
 
 **A project I made for fun after feeling burnt out. It fulfilled its purpose and put me back on track.**
 
